@@ -22,17 +22,22 @@ void main(int argc, char** argv)
 
 GLvoid DrawScene()
 {
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
 
 	glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	glLineWidth(1.0);
 	glBegin(GL_LINES);
-		glVertex3f(375.0, 300.0, 0.0);
-		glVertex3f(425.0, 300.0, 0.0);
-		glVertex3f(400.0, 275.0, 0.0);
-		glVertex3f(400.0, 325.0, 0.0);
+		glVertex3f(0.0, 300.0, 0.0);
+		glVertex3f(800.0, 300.0, 0.0);
+		glVertex3f(400.0, 0.0, 0.0);
+		glVertex3f(400.0, 600.0, 0.0);
 	glEnd();
+
+	glLoadIdentity();
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+	glTranslatef(0.5, 0.0, 0.0);
+	glutSolidCube(1.0);
 
 	glFlush();
 }
