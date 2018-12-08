@@ -7,8 +7,8 @@ GLvoid Reshape(int w, int h);
 void Keyboard(unsigned char key, int x, int y);
 void Mouse(int button, int state, int x, int y);
 
-int vertex_coordinate[MAX][2];
-int vertex_num = 0;
+GLfloat ctrlpoints[MAX][2];
+int ctrlpoints_num = 0;
 
 void main(int argc, char** argv)
 {
@@ -49,7 +49,21 @@ GLvoid DrawScene()
 	glEnd();
 
 	// 제어점
+	glMap1f(GL_MAP1_VERTEX_3, 0.0, 1.0, 3, 4, &ctrlpoints[0][0]);
+	glEnable(GL_MAP1_VERTEX_3);
 
+	glMapGrid1f(10.0, 0.0, 1.0);
+	glEvalMesh1(GL_LINE, 0, 10);
+
+	glDisable(GL_MAP1_VERTEX_3);
+
+	for (int i = 0; i < 20; i++) {
+		glPointSize(5.0);
+		glColor3f(0.0, 1.0, 0.0);
+		glBegin(GL_POINTS);
+			glVertex2i(ctrlpoints[i][0], 600 - ctrlpoints[i][1]);
+		glEnd();
+	}
 
 	// 결과 출력
 	glutSwapBuffers();
@@ -89,8 +103,10 @@ void Keyboard(unsigned char key, int x, int y)
 void Mouse(int button, int state, int x, int y)
 {
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
-		vertex_coordinate[vertex_num][0] = x;
-		vertex_coordinate[vertex_num][1] = y;
-		vertex_num = (vertex_num + 1) % 19;
+		ctrlpoints[ctrlpoints_num][0] = x;
+		ctrlpoints[ctrlpoints_num][1] = y;
+		ctrlpoints_num = (ctrlpoints_num + 1) % 19;
+
+		glutPostRedisplay();
 	}
 }

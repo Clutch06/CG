@@ -13,7 +13,7 @@ void main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
 	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1000, 1000);
 	glutCreateWindow("openGL");
 
 	// 필요한 콜백함수 설정
@@ -30,6 +30,8 @@ GLvoid DrawScene()
 	// 윈도우, 깊이 버퍼 클리어
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
